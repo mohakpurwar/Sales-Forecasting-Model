@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Forecasting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sales Forecasting Model</h1>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".xlsx" required>
+            <button type="submit">Upload Excel File</button>
+        </form>
+        <!-- Sample Excel file download link -->
+        <h3>Or download a sample input file to test the model:</h3>
+        <a href="{{ url_for('static', filename='sample_sales_data.xlsx') }}" download>
+            <button>Download Sample Excel File</button>
+        </a>
+        {% if forecast_data %}
+        <h2>Forecast Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Actual Sales</th>
+                   
+                    <th>ARIMA Predictions</th>
+                    <th>Random Forest Predictions</th>
+                    <th>Combined Predictions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in forecast_data %}
+                <tr>
+                    <td>{{ row.Date }}</td>
+                    <td>{{ row['Actual Sales'] }}</td>
+                    <td>{{ row['ARIMA Predictions'] }}</td>
+                    <td>{{ row['Random Forest Predictions'] }}</td>
+                    <td>{{ row['Combined Predictions'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    
+</body>
+</html>
