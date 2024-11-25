@@ -1,0 +1,7 @@
+Flask
+pandas
+statsmodels
+scikit-learn
+plotly
+Werkzeug
+openpyxl
